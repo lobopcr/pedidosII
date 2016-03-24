@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <!DOCTYPE html>
+ 
+<html lang="es">
+ 
+<head>
+<title>Pedidos</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="estilos.css" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="alternate" title="Pozolería RSS" type="application/rss+xml" href="/feed.rss" />
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+ 
+ <script>
+ $(document).ready(function(){
+ 	
+	$('select.producto').on('change',function(){
+    var valor = $(this).val();
+	var nombre =$(this).attr("name") 
+
+	var secuencial = nombre.substr(8, 1);
+	var c_costos = "#costo"+secuencial
+	//costo debe tomar de la base 
+	var costo = 10;
+	$(c_costos).val(costo);
+	
+	var c_total = "#total"+secuencial;
+	var c_cant  = "#cantidad"+secuencial;
+    var cantidad   = $(c_cant).val();
+	
+      $(c_total).val(costo * cantidad);
+
+    });
+
+
+	$('input.cant').on('change',function(){
+    var valor = $(this).val();
+	var nombre =$(this).attr("name") 
+
+	var secuencial = nombre.substr(8, 1);
+	var c_costos = "#costo"+secuencial;
+	var costo =$(c_costos).val();
+	
+	var c_total = "#total"+secuencial;
+
+      $(c_total).val(costo *valor);
+	  
+		var   c_nom_total="#total";
+		var   valor_total;
+		var  total_general = 0;
+		var i;
+		for (i=1; i<=5;i++)
+		{
+			 valor_total = $(c_nom_total+i).val();	
+			 if (valor_total == undefined || valor_total == null || valor_total == '') valor_total=0; //valor_total=== null
+			 total_general= parseFloat(total_general) + parseFloat(valor_total);
+		}
+
+	  $("#totalg").val(total_general);
+    });
+	
+});
+
+</script>
+ 
+<body>
+	<form name= "formul">
+	<table>
+	<tr>
+	<td><b>Cliente:<b></td>
+	<td>
+	 <select name="cliente1" id="cliente1" >
+	 <option value="0">-Seleccione-</option>
+	  <option value="1">Nombre del Cliente 1</option>
+	  <option value="2">Nombre del Cliente 2</option>
+	  <option value="3">Nombre del Cliente 3</option>
+	  <option value="4">Nombre del Cliente 4</option>
+	</select> 
+
+	</td>
+	</tr>
+	</table>
+	<table>
+	<tr><th>Producto</th><th>Cantidad</th><th>Costo</th><th>Total</th></tr>
+	<tr>
+	<td>
+	 <select name="producto1" id="producto1" class="producto" >
+	 <option value="0">-Seleccione-</option>
+	  <option value="11">Producto 1</option>
+	  <option value="22">Producto 2</option>
+	  <option value="33">Producto 3</option>
+	  <option value="44">Producto 4</option>
+	</select> 
+	</td>
+	<td><input type="text" id="cantidad1" name="cantidad1" maxlength="5" size="5" class="cant"></td>
+	<td><input type="text" id="costo1" name="costo1"  maxlength="4" size="4" readonly></td>
+	<td><input type="text" id="total1" name="total1" maxlength="5" size="5" align="right" readonly></td>
+	</tr>
+	<tr>
+	<td>
+	 <select name="producto2" id="producto2" class="producto">
+	 <option value="0">-Seleccione-</option>
+	  <option value="1">Producto 1</option>
+	  <option value="2">Producto 2</option>
+	  <option value="3">Producto 3</option>
+	  <option value="4">Producto 4</option>
+	</select> 
+	</td>
+	<td><input type="text" id="cantidad2" name="cantidad2" maxlength="5" size="5" class="cant"></td>
+	<td><input type="text" id="costo2" name="costo2" maxlength="4" size="4" readonly></td>
+	<td><input type="text" id="total2" name="total2" maxlength="5" size="5" readonly></td>
+	</tr>
+
+	<tr>
+	<td>
+	 <select name="producto3" id="producto3" class="producto">
+	 <option value="0">-Seleccione-</option>
+	  <option value="1">Producto 1</option>
+	  <option value="2">Producto 2</option>
+	  <option value="3">Producto 3</option>
+	  <option value="4">Producto 4</option>
+	</select> 
+	</td>
+	<td><input type="text" id="cantidad3" name="cantidad3" maxlength="5" size="5" class="cant"></td>
+	<td><input type="text" id="costo3" name="costo3" maxlength="4" size="4" readonly></td>
+	<td><input type="text" id="total3" name="total3" maxlength="5" size="5" readonly></td>
+	</tr>
+	<tr>
+	<td>
+	 <select name="producto4" id="producto4" class="producto">
+	  <option value="0">-Seleccione-</option>
+	  <option value="1">Producto 1</option>
+	  <option value="2">Producto 2</option>
+	  <option value="3">Producto 3</option>
+	  <option value="4">Producto 4</option>
+	</select> 
+	</td>
+	<td><input type="text" id="cantidad4" name="cantidad4" maxlength="5" size="5" class="cant" align="right" ></td>
+	<td><input type="text" id="costo4" name="costo4" maxlength="4" size="4" readonly></td>
+	<td><input type="text" id="total4" name="total4" maxlength="5" size="5" readonly></td>
+	</tr>
+
+	<tr>
+	<td>
+	 <select name="producto5" id="producto5" class="producto">
+	  <option value="0">-Seleccione-</option>
+	  <option value="1">Producto 1</option>
+	  <option value="2">Producto 2</option>
+	  <option value="3">Producto 3</option>
+	  <option value="4">Producto 4</option>
+	</select> 
+	</td>
+	<td><input type="text" id="cantidad5" name="cantidad5" maxlength="5" size="5" class="cant"></td>
+	<td><input type="text" id="costo5" name="costo5" maxlength="4" size="4" readonly></td>
+	<td><input type="text" id="total5" name="total5" maxlength="5" size="5" readonly></td>
+	</tr>
+	<tr><td></td><td></td><td>TOTAL</td><td><input type="text" id="totalg" name="totalg" maxlength="5" size="5" readonly></td></tr>
+	</table> 
+   
+  <input type="button"
+onclick="dimePropiedades()"
+value="Actulizar">
+
+
+
+</form>
+
+</body>
+</html>
+
+
+    </h:body>
+</html>
+
